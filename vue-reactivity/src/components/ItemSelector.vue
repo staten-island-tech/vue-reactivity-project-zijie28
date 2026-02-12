@@ -10,7 +10,5 @@
 </template>
 
 <script setup>
-function change(){
-    this.value
-}
+
 </script>

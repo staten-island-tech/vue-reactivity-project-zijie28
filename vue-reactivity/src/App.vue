@@ -1,6 +1,7 @@
 <script setup>
 import ItemCards from './components/ItemCards.vue';
-
+import { ref } from 'vue';
+import ShoppingCart from './components/ShoppingCart.vue';
 const dict = ref([{
         "name": "Mayodenoche",
         "id-name": "Mayodenoche",
@@ -27,7 +28,7 @@ const dict = ref([{
         "name": "a normal ssd that won't brick",
         "id-name": "a-normal-ssd-that-won't-brick",
         "category": "Technology",
-        "image": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-sn580-nvme-ssd/gallery/wd-blue-sn580-nvme-ssd-250gb-front.png.thumb.1280.1280.png",
+        "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTtkczvwcLoQOMz1OLwNFjje86QLepsM0szFu8uBa5xgWYwdvw3YMqVWfq6EJjR30e5ZdVUP4wBavi6-ds2PcCtHLdA8MhQw26KvY7FxdbED3ee13bzBlMdmQ",
         "price": "$300"
     },
     {
@@ -143,11 +144,63 @@ const dict = ref([{
         "price": "$1234"
 }])
 
+let cart = ref([])
+
+function initCount(name, price){
+    const checker = cart.value.filter((item) => item.name === name)
+    if (checker.length === 0) {
+    const dict = { name: name, price: price, quantity: 1 };
+    cart.value.push(dict);
+    } else {
+        add(name);
+    }
+}
+
+function add(name) {
+    const index = cart.value.findIndex(item => item.name === name)
+    cart.value[index].quantity++;
+}
+
+function minus(name) {
+    const index = cart.value.findIndex(item => item.name === name);
+    cart.value[index].quantity--;
+    if (cart.value[index].quantity === 0) {
+        cart.value.splice(index, 1);
+    }
+}
 
 </script>
 
 <template>
-  <div>
-    <ItemCards v-for="item in dict" :key="item[name]":item="item"></ItemCards>
+  <div id="container">
+    <ItemCards v-for="item in dict" :key="item.name":item="item" @purchase="initCount"></ItemCards>
+  </div>
+  <div id="shopping">
+    <ShoppingCart v-for="item in cart" :key="item.name" :shop-item="item" @plus="add" @minus="minus"></ShoppingCart>
   </div>
 </template>
+
+<style scoped>
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 90vw;
+  column-gap: 1vh;
+  row-gap: 4vh;
+  padding-top: 1%;
+  margin-left: 4.5%;
+  margin-bottom: 3.5%;
+}
+
+#shopping {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  gap: 2vh;
+  margin-left: 4.5%;
+  margin-bottom: 3.5%;
+}
+</style>
