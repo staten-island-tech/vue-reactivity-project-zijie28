@@ -13,7 +13,7 @@ defineProps({
     shopItem: {
         type: Object,
         required: true
-    }
+    },
 })
 </script>
 

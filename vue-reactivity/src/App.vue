@@ -2,6 +2,7 @@
 import ItemCards from './components/ItemCards.vue';
 import { ref } from 'vue';
 import ShoppingCart from './components/ShoppingCart.vue';
+import ShoppingTotal from './components/ShoppingTotal.vue';
 const dict = ref([{
         "name": "Mayodenoche",
         "id-name": "Mayodenoche",
@@ -177,6 +178,7 @@ function minus(name) {
   </div>
   <div id="shopping">
     <ShoppingCart v-for="item in cart" :key="item.name" :shop-item="item" @plus="add" @minus="minus"></ShoppingCart>
+    <ShoppingTotal :totals="cart"></ShoppingTotal>
   </div>
 </template>
 
