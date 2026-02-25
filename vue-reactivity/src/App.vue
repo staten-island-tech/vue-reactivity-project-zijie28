@@ -178,7 +178,7 @@ function minus(name) {
   </div>
   <div id="shopping">
     <ShoppingCart v-for="item in cart" :key="item.name" :shop-item="item" @plus="add" @minus="minus"></ShoppingCart>
-    <ShoppingTotal :totals="cart"></ShoppingTotal>
+    <ShoppingTotal :totals="cart" @update:totals="cart"></ShoppingTotal>
   </div>
 </template>
 
