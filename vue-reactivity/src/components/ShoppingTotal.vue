@@ -1,28 +1,58 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 const prop = defineProps({
     totals: {
         type: Array,
         required: true
     }
 })
-let total2 = ref(0)
+
 
 const value = computed(() => {
-    total2.value = 0
-    const total = prop.totals.forEach((item) => {
-        const item_total = item.value * item.quantity
-        total2.value += item_total
-    })
-    return total
+    return prop.totals.reduce((sum , item) => sum + item.quantity * parseFloat(item.price.slice(1)), 0);
 })
 
 
 </script>
 
 <template>
-    <div>
-        <p class="total">Total:</p>
-        <p class="number" >{{ total2 }}</p>
+    <div class = "total">
+        <p class="word-total">Total:</p>
+        <p class="showed-total" >{{ value }}</p>
     </div>
 </template>
+
+<style scoped>
+.total {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(85, 126, 126);
+  width: 100%;
+  height: 10vh;
+  border-radius: 20px;
+  box-shadow: 5px 4px 4px;
+  margin-bottom: 3.5%;
+  width: 90vw;
+}
+
+.word-total {
+  float: left;
+  text-align: left;
+  font-size: xx-large;
+  background-color: rgb(85, 126, 126);
+  border-radius: 10px;
+  margin: 1%;
+  width: 90%;
+}
+
+.showed-total {
+  float: left;
+  text-align: left;
+  font-size: xx-large;
+  background-color: rgb(85, 126, 126);
+  border-radius: 10px;
+  margin: 1%;
+}
+</style>
