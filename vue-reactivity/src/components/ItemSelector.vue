@@ -27,3 +27,21 @@ function change(event) {
     }
 }
 </script>
+
+<style scoped>
+.catagory{
+  background-color: rgb(85, 126, 126);
+  text-align: center;
+  width: 15%;
+}
+
+#select-option{
+  background-color: rgb(85, 126, 126);  
+}
+
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+</style>

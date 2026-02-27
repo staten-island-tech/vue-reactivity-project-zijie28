@@ -7,7 +7,7 @@ import { dict } from './components/ShoppingInventory';
 import ItemSelector from './components/ItemSelector.vue';
 
 let cart = ref([])
-let Vardict = dict
+let Vardict = ref(dict)
 
 function initCount(name, price){
     const checker = cart.value.filter((item) => item.name === name)
@@ -33,7 +33,7 @@ function minus(name) {
 }
 
 function updateDict(Object) {
-    Vardict = Object;
+    Vardict.value = Object;
     console.log(Vardict)
 }
 </script>
@@ -51,6 +51,14 @@ function updateDict(Object) {
 
 <style scoped>
 
+html {
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+  background-color: rgb(53, 60, 66);
+}
 #container {
   display: flex;
   flex-wrap: wrap;

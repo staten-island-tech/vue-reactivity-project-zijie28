@@ -18,7 +18,7 @@ const value = computed(() => {
 <template>
     <div class = "total">
         <p class="word-total">Total:</p>
-        <p class="showed-total" >{{ value }}</p>
+        <p class="showed-total" >${{ value }}</p>
     </div>
 </template>
 
